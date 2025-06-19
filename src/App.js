@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar";
+import TextBox from "./components/TextBox";
+import react, {useState} from 'react';
+import About from "./components/About";
+
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
+  const [isDark, toggleDark] = useState(false);
+  const tDark = ()=> {
+    toggleDark(!isDark);
+  }
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+    <Router>
+    <Navbar title={5} isDark={isDark} toggleDark={tDark} />
+    <div className="container my-3">
+      <Routes>
+        <Route path="/" element={<TextBox heading="Enter Text Here To Manipulate" />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </div>
-  );
+    </Router>
+    </>
+  ); 
 }
+
+
 
 export default App;
